@@ -8,6 +8,7 @@ export async function fetchCircuits() {
       "x-rapidapi-host": "v1.formula-1.api-sports.io",
     },
   });
+
   return response.json();
 }
 
@@ -22,5 +23,6 @@ export async function fetchDrivers(search = "") {
       },
     }
   );
+
   return response.json();
 }

@@ -16,7 +16,7 @@
 		<CircuitCard v-for="item in data.response" :key="item.id" :circuit-data="item" />
 	</div>
 </template>
-  
+
 <script>
 import CircuitCard from '../components/CircuitCard.vue'
 import { fetchCircuits } from "../services/api"
@@ -45,7 +45,7 @@ export default {
 					this.data = response
 				})
 				.catch(error => {
-					this.error = error.message
+					this.error = error
 				})
 				.finally(() => {
 					this.loading = false

@@ -9,8 +9,9 @@
         </nav>
         <div class="center">
           <h1>Vitesse<br>adrénaline<br>passion</h1>
-          <p>Découvrez l'univers palpitant de la Formule 1 sur notre site ! Explorez les circuits mythiques et rencontrez
-            les pilotes les plus talentueux du monde. Plongez dans l'action et vivez la passion de la F1 avec nous."</p>
+          <p>Découvrez l'univers palpitant de la Formule 1 sur notre site ! Explorez les circuits mythiques et
+            rencontrez
+            les pilotes les plus talentueux du monde. Plongez dans l'action et vivez la passion de la F1 avec nous.</p>
         </div>
 
       </div>
@@ -127,5 +128,14 @@ footer p {
     padding: 0 24px;
   }
 
+}
+</style>
+
+<style>
+.loading,
+.error {
+  color: red;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 </style>

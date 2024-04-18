@@ -10,19 +10,24 @@
 			<input type="text" v-model="search" placeholder="Rechercher un pilote" />
 			<button type="submit">Rechercher</button>
 		</form>
-		<DriverCard v-for="item in data.response" :key="item.id" :driver-data="item" />
+
+		<FilterDrivers @filter="nbPodiums = $event" :max-podiums="getMaxPodiums" />
+
+		<DriverCard v-for="item in filteredDrivers" :key="item.id" :driver-data="item" />
 	</div>
 </template>
 
 <script>
 import { fetchDrivers } from "../services/api"
 import DriverCard from "../components/DriverCard.vue"
+import FilterDrivers from "../components/FilterDrivers.vue"
 
 export default {
 	name: 'Drivers',
 	data() {
 		return {
-			search: "lewis hamilton",
+			search: "cha",
+			nbPodiums: 0,
 			loading: false,
 			data: null,
 			error: null,
@@ -34,12 +39,18 @@ export default {
 	methods: {
 		async fetchData() {
 			this.loading = true
+			this.error = null
+
+			if (this.search === "" || this.search.length < 4)
+				this.error = "Veuillez entrer un nom de pilote valide"
+
 			fetchDrivers(this.search)
 				.then(response => {
 					this.data = response
 				})
 				.catch(error => {
-					this.error = error.message
+					console.log(error);
+					this.error = error
 				})
 				.finally(() => {
 					this.loading = false
@@ -47,8 +58,19 @@ export default {
 		}
 	},
 	components: {
-		DriverCard
-	}
+		DriverCard,
+		FilterDrivers
+	},
+	computed: {
+		filteredDrivers() {
+			if (!this.data) return []
+			return this.data.response.filter(driver => driver.podiums >= this.nbPodiums)
+		},
+		getMaxPodiums() {
+			if (!this.data) return 0
+			return Math.max(...this.data.response.map(driver => driver.podiums))
+		}
+	},
 }
 </script>
 
